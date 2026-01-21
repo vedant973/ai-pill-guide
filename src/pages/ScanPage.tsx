@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, Download, RotateCcw } from "lucide-react";
+import { ArrowRight, Download, RotateCcw } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StepIndicator } from "@/components/StepIndicator";
@@ -11,10 +11,12 @@ import { MedicineCard } from "@/components/MedicineCard";
 import { DisclaimerBanner } from "@/components/DisclaimerBanner";
 import { Button } from "@/components/ui/button";
 import { findMedicine, type Medicine } from "@/data/medicineDatabase";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const steps = [
   { number: 1, title: "Upload" },
-  { number: 2, title: "Extracted Text" },
+  { number: 2, title: "Processing" },
   { number: 3, title: "Results" },
 ];
 
@@ -28,48 +30,31 @@ interface MedicineResult {
   medicine: Medicine;
   extractedDosage?: string;
   extractedFrequency?: string;
+  extractedDuration?: string;
   confidence: number;
 }
 
-// Simulated OCR extraction (would be replaced with actual AI backend call)
-function simulateOCR(): Promise<{ items: ExtractedItem[]; rawText: string }> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        items: [
-          { text: "Paracetamol", type: "medicine", confidence: 92 },
-          { text: "500mg", type: "dosage", confidence: 88 },
-          { text: "Twice daily", type: "frequency", confidence: 85 },
-          { text: "Amoxicillin", type: "medicine", confidence: 89 },
-          { text: "250mg", type: "dosage", confidence: 91 },
-          { text: "Three times daily", type: "frequency", confidence: 82 },
-          { text: "5 days", type: "duration", confidence: 78 },
-          { text: "Omeprazole", type: "medicine", confidence: 86 },
-          { text: "20mg", type: "dosage", confidence: 90 },
-          { text: "Before breakfast", type: "other", confidence: 75 },
-        ],
-        rawText: `Rx
+interface AIExtractedMedicine {
+  name: string;
+  dosage: string;
+  frequency: string;
+  duration: string;
+  confidence: number;
+}
 
-Patient: John Doe
-Date: 15/01/2026
+interface AIAnalysisResult {
+  medicines: AIExtractedMedicine[];
+  rawText: string;
+  overallConfidence: number;
+}
 
-1. Tab. Paracetamol 500mg
-   - Twice daily for fever
-   - After food
-
-2. Cap. Amoxicillin 250mg
-   - Three times daily
-   - For 5 days
-   - With water
-
-3. Tab. Omeprazole 20mg
-   - Once daily
-   - Before breakfast
-
-Dr. Smith
-Reg. No: 12345`,
-      });
-    }, 500);
+// Convert file to base64
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
   });
 }
 
@@ -82,6 +67,9 @@ export default function ScanPage() {
     rawText: string;
   } | null>(null);
   const [medicineResults, setMedicineResults] = useState<MedicineResult[]>([]);
+  const [aiMedicines, setAiMedicines] = useState<AIExtractedMedicine[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const { toast } = useToast();
 
   const handleImageUpload = useCallback((file: File) => {
     setUploadedFile(file);
@@ -90,53 +78,103 @@ export default function ScanPage() {
   const processImage = async () => {
     if (!uploadedFile) return;
 
-    // Start processing animation
+    setIsProcessing(true);
     setCurrentStep(2);
     setProcessingStage(0);
 
-    // Simulate processing stages
-    for (let i = 0; i < 4; i++) {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-      setProcessingStage(i + 1);
-    }
+    try {
+      // Convert image to base64
+      const imageBase64 = await fileToBase64(uploadedFile);
 
-    // Get OCR results
-    const data = await simulateOCR();
-    setExtractedData(data);
+      // Animate through stages while API processes
+      const stageInterval = setInterval(() => {
+        setProcessingStage((prev) => Math.min(prev + 1, 3));
+      }, 1500);
 
-    // Match medicines
-    const medicines: MedicineResult[] = [];
-    const medicineItems = data.items.filter((item) => item.type === "medicine");
+      // Call the AI edge function
+      const { data, error } = await supabase.functions.invoke('analyze-prescription', {
+        body: { imageBase64 }
+      });
 
-    medicineItems.forEach((item, index) => {
-      const found = findMedicine(item.text);
-      if (found) {
-        const dosageItem = data.items.find(
-          (i, idx) =>
-            i.type === "dosage" &&
-            idx > data.items.indexOf(item) &&
-            (index === medicineItems.length - 1 ||
-              idx < data.items.indexOf(medicineItems[index + 1]))
-        );
-        const freqItem = data.items.find(
-          (i, idx) =>
-            i.type === "frequency" &&
-            idx > data.items.indexOf(item) &&
-            (index === medicineItems.length - 1 ||
-              idx < data.items.indexOf(medicineItems[index + 1]))
-        );
+      clearInterval(stageInterval);
+      setProcessingStage(4);
 
-        medicines.push({
-          medicine: found,
-          extractedDosage: dosageItem?.text,
-          extractedFrequency: freqItem?.text,
-          confidence: item.confidence,
+      if (error) {
+        console.error("Error analyzing prescription:", error);
+        toast({
+          title: "Analysis Failed",
+          description: error.message || "Failed to analyze the prescription. Please try again.",
+          variant: "destructive",
         });
+        setCurrentStep(1);
+        setIsProcessing(false);
+        return;
       }
-    });
 
-    setMedicineResults(medicines);
-    setCurrentStep(3);
+      const result = data as AIAnalysisResult;
+      
+      if (!result || !result.medicines) {
+        toast({
+          title: "No Medicines Found",
+          description: "Could not extract any medicines from the prescription. Please try a clearer image.",
+          variant: "destructive",
+        });
+        setCurrentStep(1);
+        setIsProcessing(false);
+        return;
+      }
+
+      // Store AI-extracted medicines
+      setAiMedicines(result.medicines);
+
+      // Convert AI result to extracted items format
+      const items: ExtractedItem[] = [];
+      result.medicines.forEach((med) => {
+        items.push({ text: med.name, type: "medicine", confidence: med.confidence });
+        if (med.dosage) items.push({ text: med.dosage, type: "dosage", confidence: med.confidence });
+        if (med.frequency) items.push({ text: med.frequency, type: "frequency", confidence: med.confidence });
+        if (med.duration) items.push({ text: med.duration, type: "duration", confidence: med.confidence });
+      });
+
+      setExtractedData({
+        items,
+        rawText: result.rawText || "Prescription text extracted successfully."
+      });
+
+      // Match with database for additional info
+      const medicines: MedicineResult[] = [];
+      result.medicines.forEach((aiMed) => {
+        const found = findMedicine(aiMed.name);
+        if (found) {
+          medicines.push({
+            medicine: found,
+            extractedDosage: aiMed.dosage,
+            extractedFrequency: aiMed.frequency,
+            extractedDuration: aiMed.duration,
+            confidence: aiMed.confidence,
+          });
+        }
+      });
+
+      setMedicineResults(medicines);
+      setCurrentStep(3);
+
+      toast({
+        title: "Analysis Complete",
+        description: `Found ${result.medicines.length} medicine(s) in your prescription.`,
+      });
+
+    } catch (err) {
+      console.error("Error processing image:", err);
+      toast({
+        title: "Processing Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+      setCurrentStep(1);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const reset = () => {
@@ -145,6 +183,7 @@ export default function ScanPage() {
     setUploadedFile(null);
     setExtractedData(null);
     setMedicineResults([]);
+    setAiMedicines([]);
   };
 
   return (
@@ -191,6 +230,7 @@ export default function ScanPage() {
                       variant="medical"
                       size="lg"
                       onClick={processImage}
+                      disabled={isProcessing}
                     >
                       Analyze Prescription
                       <ArrowRight className="h-4 w-4" />
@@ -205,7 +245,7 @@ export default function ScanPage() {
             )}
 
             {/* Step 2: Processing */}
-            {currentStep === 2 && processingStage < 4 && (
+            {currentStep === 2 && (
               <motion.div
                 key="processing"
                 initial={{ opacity: 0 }}
@@ -213,22 +253,6 @@ export default function ScanPage() {
                 exit={{ opacity: 0 }}
               >
                 <ProcessingLoader currentStage={processingStage} />
-              </motion.div>
-            )}
-
-            {/* Step 2: Extracted Text Preview (shown briefly) */}
-            {currentStep === 2 && processingStage >= 4 && extractedData && (
-              <motion.div
-                key="extracted"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                className="space-y-8"
-              >
-                <ExtractedTextPreview
-                  items={extractedData.items}
-                  rawText={extractedData.rawText}
-                />
               </motion.div>
             )}
 
@@ -246,8 +270,8 @@ export default function ScanPage() {
                     Medicine Analysis Results
                   </h1>
                   <p className="text-muted-foreground">
-                    We identified {medicineResults.length} medicine(s) from your
-                    prescription. Here's the detailed information.
+                    We identified {aiMedicines.length} medicine(s) from your
+                    prescription. {medicineResults.length > 0 && `${medicineResults.length} matched with our database for detailed information.`}
                   </p>
                 </div>
 
@@ -265,19 +289,58 @@ export default function ScanPage() {
                   </div>
                 )}
 
-                {/* Medicine Cards */}
-                <div className="max-w-3xl mx-auto space-y-6">
-                  {medicineResults.map((result, index) => (
-                    <MedicineCard
-                      key={index}
-                      medicine={result.medicine}
-                      extractedDosage={result.extractedDosage}
-                      extractedFrequency={result.extractedFrequency}
-                      confidence={result.confidence}
-                      index={index}
-                    />
-                  ))}
-                </div>
+                {/* Medicine Cards - Show database matches */}
+                {medicineResults.length > 0 && (
+                  <div className="max-w-3xl mx-auto space-y-6">
+                    <h2 className="text-xl font-semibold text-center">Detailed Medicine Information</h2>
+                    {medicineResults.map((result, index) => (
+                      <MedicineCard
+                        key={index}
+                        medicine={result.medicine}
+                        extractedDosage={result.extractedDosage}
+                        extractedFrequency={result.extractedFrequency}
+                        confidence={result.confidence}
+                        index={index}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Show AI-extracted medicines not in database */}
+                {aiMedicines.filter(m => !medicineResults.find(r => r.medicine.name.toLowerCase() === m.name.toLowerCase())).length > 0 && (
+                  <div className="max-w-3xl mx-auto">
+                    <h3 className="text-lg font-medium text-center text-muted-foreground mb-4">
+                      Additional Medicines (Not in Database)
+                    </h3>
+                    <div className="space-y-4">
+                      {aiMedicines
+                        .filter(m => !medicineResults.find(r => r.medicine.name.toLowerCase() === m.name.toLowerCase()))
+                        .map((med, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="p-4 rounded-xl border bg-card"
+                          >
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <h4 className="font-semibold">{med.name}</h4>
+                                <p className="text-sm text-muted-foreground">
+                                  {med.dosage && `${med.dosage} • `}
+                                  {med.frequency && `${med.frequency} • `}
+                                  {med.duration && med.duration}
+                                </p>
+                              </div>
+                              <span className="text-sm text-muted-foreground">
+                                {med.confidence}% confidence
+                              </span>
+                            </div>
+                          </motion.div>
+                        ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Actions */}
                 <div className="flex flex-wrap justify-center gap-4">
