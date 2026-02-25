@@ -149,15 +149,38 @@ Respond ONLY with valid JSON in this exact format:
       const jsonMatch = content.match(/```(?:json)?\s*([\s\S]*?)```/);
       if (jsonMatch) {
         jsonStr = jsonMatch[1].trim();
+      } else {
+        // Try to find raw JSON object in the response
+        const rawJsonMatch = content.match(/\{[\s\S]*\}/);
+        if (rawJsonMatch) {
+          jsonStr = rawJsonMatch[0];
+        }
       }
-      
+
+      // Sanitize: replace literal newlines inside string values to prevent parse errors
+      jsonStr = jsonStr.replace(/:\s*"((?:[^"\\]|\\.)*)"/g, (_match: string, val: string) => {
+        const sanitized = val.replace(/\n/g, " ").replace(/\r/g, "");
+        return `: "${sanitized}"`;
+      });
+
       analysisResult = JSON.parse(jsonStr);
     } catch (parseError) {
       console.error("Failed to parse AI response:", content);
-      // Fallback: try to extract medicine names from raw text
+      // Fallback: try to extract medicine names from raw text using regex
+      const medicineMatches = content.match(/"name"\s*:\s*"([^"]+)"/g) || [];
+      const medicines = medicineMatches.map((m: string) => {
+        const nameMatch = m.match(/"name"\s*:\s*"([^"]+)"/);
+        return {
+          name: nameMatch ? nameMatch[1] : "Unknown",
+          dosage: "",
+          frequency: "",
+          duration: "",
+          confidence: 50
+        };
+      });
       analysisResult = {
-        medicines: [],
-        rawText: content,
+        medicines,
+        rawText: content.replace(/```json|```/g, "").trim(),
         overallConfidence: 50
       };
     }
