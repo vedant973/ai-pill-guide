@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Download, RotateCcw } from "lucide-react";
 import { Header } from "@/components/Header";
@@ -9,6 +9,7 @@ import { ProcessingLoader } from "@/components/ProcessingLoader";
 import { ExtractedTextPreview } from "@/components/ExtractedTextPreview";
 import { MedicineCard } from "@/components/MedicineCard";
 import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+import { PrescriptionReport } from "@/components/PrescriptionReport";
 import { Button } from "@/components/ui/button";
 import { findMedicine, type Medicine } from "@/data/medicineDatabase";
 import { supabase } from "@/integrations/supabase/client";
@@ -69,7 +70,33 @@ export default function ScanPage() {
   const [medicineResults, setMedicineResults] = useState<MedicineResult[]>([]);
   const [aiMedicines, setAiMedicines] = useState<AIExtractedMedicine[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const reportRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+
+  const handleDownloadReport = () => {
+    if (!reportRef.current) return;
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) return;
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Prescription Analysis Report</title>
+          <script src="https://cdn.tailwindcss.com"></script>
+          <style>
+            body { margin: 0; padding: 0; font-family: sans-serif; }
+            @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+          </style>
+        </head>
+        <body>${reportRef.current.innerHTML}</body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => {
+      printWindow.print();
+    }, 500);
+  };
 
   const handleImageUpload = useCallback((file: File) => {
     setUploadedFile(file);
@@ -342,13 +369,24 @@ export default function ScanPage() {
                   </div>
                 )}
 
+                {/* Hidden Printable Report */}
+                <div className="hidden">
+                  <PrescriptionReport
+                    ref={reportRef}
+                    medicineResults={medicineResults}
+                    aiMedicines={aiMedicines}
+                    rawText={extractedData?.rawText || ""}
+                    scanDate={new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                  />
+                </div>
+
                 {/* Actions */}
                 <div className="flex flex-wrap justify-center gap-4">
                   <Button variant="outline" onClick={reset}>
                     <RotateCcw className="h-4 w-4" />
                     Scan Another
                   </Button>
-                  <Button variant="medical">
+                  <Button variant="medical" onClick={handleDownloadReport}>
                     <Download className="h-4 w-4" />
                     Download Report
                   </Button>
