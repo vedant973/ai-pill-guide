@@ -93,12 +93,47 @@ export function MedicineCard({
         <p className="text-sm text-foreground">{medicine.intakeGuidelines}</p>
       </div>
 
+      {/* Side Effects & Overdose — always visible */}
+      <div className="mx-6 mb-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+        {/* Common Side Effects */}
+        <div className="p-4 rounded-xl bg-warning/10 border border-warning/30">
+          <h4 className="font-medium flex items-center gap-2 mb-2 text-warning">
+            <AlertTriangle className="h-4 w-4" />
+            Common Side Effects
+          </h4>
+          <ul className="text-sm space-y-1">
+            {medicine.sideEffects.map((effect, i) => (
+              <li key={i} className="flex items-center gap-2 text-foreground">
+                <span className="h-1.5 w-1.5 rounded-full bg-warning shrink-0" />
+                {effect}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Overdose / Overuse Effects */}
+        <div className="p-4 rounded-xl bg-destructive/10 border border-destructive/30">
+          <h4 className="font-medium flex items-center gap-2 mb-2 text-destructive">
+            <AlertTriangle className="h-4 w-4" />
+            Overdose / Overuse Effects
+          </h4>
+          <ul className="text-sm space-y-1">
+            {medicine.overuseEffects.map((effect, i) => (
+              <li key={i} className="flex items-center gap-2 text-foreground">
+                <span className="h-1.5 w-1.5 rounded-full bg-destructive shrink-0" />
+                {effect}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
       {/* Expandable Details */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full px-6 py-3 flex items-center justify-between bg-muted/50 hover:bg-muted transition-colors"
       >
-        <span className="text-sm font-medium">View Detailed Information</span>
+        <span className="text-sm font-medium">View More Details</span>
         <motion.div animate={{ rotate: isExpanded ? 180 : 0 }}>
           <ChevronDown className="h-4 w-4" />
         </motion.div>
@@ -124,38 +159,6 @@ export function MedicineCard({
                 </span>
               ))}
             </div>
-          </div>
-
-          {/* Side Effects */}
-          <div>
-            <h4 className="font-medium flex items-center gap-2 mb-2">
-              <AlertTriangle className="h-4 w-4 text-warning" />
-              Common Side Effects
-            </h4>
-            <ul className="text-sm text-muted-foreground space-y-1">
-              {medicine.sideEffects.map((effect, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-warning" />
-                  {effect}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Overuse Effects */}
-          <div className="p-4 rounded-xl bg-destructive/5 border border-destructive/20">
-            <h4 className="font-medium flex items-center gap-2 mb-2 text-destructive">
-              <AlertTriangle className="h-4 w-4" />
-              Effects of Overuse / Incorrect Usage
-            </h4>
-            <ul className="text-sm space-y-1">
-              {medicine.overuseEffects.map((effect, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-destructive" />
-                  {effect}
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Warnings */}
