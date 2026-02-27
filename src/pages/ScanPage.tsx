@@ -12,7 +12,6 @@ import { DisclaimerBanner } from "@/components/DisclaimerBanner";
 import { PrescriptionReport } from "@/components/PrescriptionReport";
 import { Button } from "@/components/ui/button";
 import { findMedicine, type Medicine } from "@/data/medicineDatabase";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const steps = [
@@ -119,18 +118,27 @@ export default function ScanPage() {
       }, 1500);
 
       // Call the AI edge function
-      const { data, error } = await supabase.functions.invoke('analyze-prescription', {
-        body: { imageBase64 }
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+      const response = await fetch(`${supabaseUrl}/functions/v1/analyze-prescription`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${supabaseKey}`,
+          "apikey": supabaseKey,
+        },
+        body: JSON.stringify({ imageBase64 }),
       });
 
       clearInterval(stageInterval);
       setProcessingStage(4);
 
-      if (error) {
-        console.error("Error analyzing prescription:", error);
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        console.error("Error analyzing prescription:", errData);
         toast({
           title: "Analysis Failed",
-          description: error.message || "Failed to analyze the prescription. Please try again.",
+          description: errData.error || "Failed to analyze the prescription. Please try again.",
           variant: "destructive",
         });
         setCurrentStep(1);
@@ -138,7 +146,7 @@ export default function ScanPage() {
         return;
       }
 
-      const result = data as AIAnalysisResult;
+      const result = (await response.json()) as AIAnalysisResult;
       
       if (!result || !result.medicines) {
         toast({
