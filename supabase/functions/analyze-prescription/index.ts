@@ -77,6 +77,17 @@ Respond ONLY with valid JSON in this exact format:
 
     console.log("Calling Lovable AI Gateway for prescription analysis...");
 
+    // Extract base64 data and mime type
+    let base64Data = imageBase64;
+    let mimeType = "image/jpeg";
+    if (imageBase64.startsWith("data:")) {
+      const matches = imageBase64.match(/^data:([^;]+);base64,(.+)$/);
+      if (matches) {
+        mimeType = matches[1];
+        base64Data = matches[2];
+      }
+    }
+
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -84,7 +95,7 @@ Respond ONLY with valid JSON in this exact format:
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-2.5-pro",
+        model: "openai/gpt-5-mini",
         messages: [
           { role: "system", content: systemPrompt },
           {
@@ -94,16 +105,13 @@ Respond ONLY with valid JSON in this exact format:
               {
                 type: "image_url",
                 image_url: {
-                  url: imageBase64.startsWith("data:") 
-                    ? imageBase64 
-                    : `data:image/jpeg;base64,${imageBase64}`
+                  url: `data:${mimeType};base64,${base64Data}`
                 }
               }
             ]
           }
         ],
-        max_tokens: 2000,
-        temperature: 0.2,
+        max_completion_tokens: 2000,
       }),
     });
 
