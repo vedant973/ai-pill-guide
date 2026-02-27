@@ -117,36 +117,39 @@ export default function ScanPage() {
         setProcessingStage((prev) => Math.min(prev + 1, 3));
       }, 1500);
 
-      // Call the AI edge function
+      // Call the AI edge function using XMLHttpRequest to bypass sandbox fetch restrictions
       const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
       const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-      const response = await fetch(`${supabaseUrl}/functions/v1/analyze-prescription`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${supabaseKey}`,
-          "apikey": supabaseKey,
-        },
-        body: JSON.stringify({ imageBase64 }),
+
+      const result = await new Promise<AIAnalysisResult>((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", `${supabaseUrl}/functions/v1/analyze-prescription`, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Authorization", `Bearer ${supabaseKey}`);
+        xhr.setRequestHeader("apikey", supabaseKey);
+        xhr.timeout = 60000;
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            try {
+              resolve(JSON.parse(xhr.responseText));
+            } catch {
+              reject(new Error("Invalid JSON response"));
+            }
+          } else {
+            try {
+              const err = JSON.parse(xhr.responseText);
+              reject(new Error(err.error || "Analysis failed"));
+            } catch {
+              reject(new Error("Analysis failed"));
+            }
+          }
+        };
+        xhr.onerror = () => reject(new Error("Failed to connect to analysis service"));
+        xhr.ontimeout = () => reject(new Error("Request timed out. Please try again."));
+        xhr.send(JSON.stringify({ imageBase64 }));
       });
 
-      clearInterval(stageInterval);
-      setProcessingStage(4);
 
-      if (!response.ok) {
-        const errData = await response.json().catch(() => ({}));
-        console.error("Error analyzing prescription:", errData);
-        toast({
-          title: "Analysis Failed",
-          description: errData.error || "Failed to analyze the prescription. Please try again.",
-          variant: "destructive",
-        });
-        setCurrentStep(1);
-        setIsProcessing(false);
-        return;
-      }
-
-      const result = (await response.json()) as AIAnalysisResult;
       
       if (!result || !result.medicines) {
         toast({
@@ -202,8 +205,8 @@ export default function ScanPage() {
     } catch (err) {
       console.error("Error processing image:", err);
       toast({
-        title: "Processing Error",
-        description: "An unexpected error occurred. Please try again.",
+        title: "Analysis Failed",
+        description: err instanceof Error ? err.message : "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
       setCurrentStep(1);
