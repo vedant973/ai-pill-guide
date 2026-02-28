@@ -1,5 +1,4 @@
 import { useState, useCallback, useRef } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Download, RotateCcw } from "lucide-react";
 import { Header } from "@/components/Header";
@@ -118,18 +117,34 @@ export default function ScanPage() {
         setProcessingStage((prev) => Math.min(prev + 1, 3));
       }, 1500);
 
-      // Call the AI edge function via Supabase client
-      const { data: result, error: fnError } = await supabase.functions.invoke<AIAnalysisResult>(
-        "analyze-prescription",
-        { body: { imageBase64 } }
-      );
+      // Call the AI edge function via direct fetch
+      const fnUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-prescription`;
+      const fnKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-      if (fnError) {
+      let result: AIAnalysisResult;
+      try {
+        const response = await fetch(fnUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${fnKey}`,
+            "apikey": fnKey,
+          },
+          body: JSON.stringify({ imageBase64 }),
+        });
+
+        if (!response.ok) {
+          const errBody = await response.json().catch(() => ({}));
+          throw new Error(errBody.error || `Server error: ${response.status}`);
+        }
+
+        result = await response.json();
+      } catch (fetchErr) {
         clearInterval(stageInterval);
-        console.error("Edge function error:", fnError);
+        console.error("Edge function error:", fetchErr);
         toast({
           title: "Analysis Failed",
-          description: fnError.message || "Failed to analyze the prescription. Please try again.",
+          description: fetchErr instanceof Error ? fetchErr.message : "Failed to analyze the prescription. Please try again.",
           variant: "destructive",
         });
         setCurrentStep(1);
