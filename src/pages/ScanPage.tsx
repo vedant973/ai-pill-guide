@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Download, RotateCcw } from "lucide-react";
 import { Header } from "@/components/Header";
@@ -117,40 +118,28 @@ export default function ScanPage() {
         setProcessingStage((prev) => Math.min(prev + 1, 3));
       }, 1500);
 
-      // Call the AI edge function using XMLHttpRequest to bypass sandbox fetch restrictions
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+      // Call the AI edge function via Supabase client
+      const { data: result, error: fnError } = await supabase.functions.invoke<AIAnalysisResult>(
+        "analyze-prescription",
+        { body: { imageBase64 } }
+      );
 
-      const result = await new Promise<AIAnalysisResult>((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", `${supabaseUrl}/functions/v1/analyze-prescription`, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("Authorization", `Bearer ${supabaseKey}`);
-        xhr.setRequestHeader("apikey", supabaseKey);
-        xhr.timeout = 60000;
-        xhr.onload = () => {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            try {
-              resolve(JSON.parse(xhr.responseText));
-            } catch {
-              reject(new Error("Invalid JSON response"));
-            }
-          } else {
-            try {
-              const err = JSON.parse(xhr.responseText);
-              reject(new Error(err.error || "Analysis failed"));
-            } catch {
-              reject(new Error("Analysis failed"));
-            }
-          }
-        };
-        xhr.onerror = () => reject(new Error("Failed to connect to analysis service"));
-        xhr.ontimeout = () => reject(new Error("Request timed out. Please try again."));
-        xhr.send(JSON.stringify({ imageBase64 }));
-      });
+      if (fnError) {
+        clearInterval(stageInterval);
+        console.error("Edge function error:", fnError);
+        toast({
+          title: "Analysis Failed",
+          description: fnError.message || "Failed to analyze the prescription. Please try again.",
+          variant: "destructive",
+        });
+        setCurrentStep(1);
+        setIsProcessing(false);
+        return;
+      }
 
+      clearInterval(stageInterval);
+      setProcessingStage(4);
 
-      
       if (!result || !result.medicines) {
         toast({
           title: "No Medicines Found",
