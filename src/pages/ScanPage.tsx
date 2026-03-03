@@ -40,6 +40,8 @@ interface AIExtractedMedicine {
   frequency: string;
   duration: string;
   confidence: number;
+  sideEffects?: string[];
+  overdoseEffects?: string[];
 }
 
 interface AIAnalysisResult {
@@ -350,37 +352,83 @@ export default function ScanPage() {
 
                 {/* Show AI-extracted medicines not in database */}
                 {aiMedicines.filter(m => !medicineResults.find(r => r.medicine.name.toLowerCase() === m.name.toLowerCase())).length > 0 && (
-                  <div className="max-w-3xl mx-auto">
-                    <h3 className="text-lg font-medium text-center text-muted-foreground mb-4">
-                      Additional Medicines (Not in Database)
-                    </h3>
-                    <div className="space-y-4">
-                      {aiMedicines
-                        .filter(m => !medicineResults.find(r => r.medicine.name.toLowerCase() === m.name.toLowerCase()))
-                        .map((med, index) => (
-                          <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="p-4 rounded-xl border bg-card"
-                          >
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <h4 className="font-semibold">{med.name}</h4>
-                                <p className="text-sm text-muted-foreground">
-                                  {med.dosage && `${med.dosage} • `}
-                                  {med.frequency && `${med.frequency} • `}
-                                  {med.duration && med.duration}
-                                </p>
+                  <div className="max-w-3xl mx-auto space-y-6">
+                    <h2 className="text-xl font-semibold text-center">Additional Medicines</h2>
+                    {aiMedicines
+                      .filter(m => !medicineResults.find(r => r.medicine.name.toLowerCase() === m.name.toLowerCase()))
+                      .map((med, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          className="rounded-2xl border bg-card shadow-card overflow-hidden"
+                        >
+                          {/* Header */}
+                          <div className="p-6 pb-4">
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex items-start gap-4">
+                                <div className="flex h-14 w-14 items-center justify-center rounded-xl gradient-medical shrink-0">
+                                  <svg className="h-7 w-7 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                                </div>
+                                <div>
+                                  <h3 className="text-xl font-bold">{med.name}</h3>
+                                  <p className="text-sm text-muted-foreground">
+                                    {med.dosage && `${med.dosage}`}{med.frequency && ` • ${med.frequency}`}{med.duration && ` • ${med.duration}`}
+                                  </p>
+                                  <span className="inline-block mt-2 px-3 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground">
+                                    AI Extracted
+                                  </span>
+                                </div>
                               </div>
-                              <span className="text-sm text-muted-foreground">
-                                {med.confidence}% confidence
-                              </span>
+                              <div className="text-right">
+                                <div className="text-sm text-muted-foreground">Confidence</div>
+                                <div className={`text-lg font-bold ${med.confidence >= 80 ? "text-success" : med.confidence >= 60 ? "text-warning" : "text-destructive"}`}>
+                                  {med.confidence}%
+                                </div>
+                              </div>
                             </div>
-                          </motion.div>
-                        ))}
-                    </div>
+                          </div>
+
+                          {/* Side Effects */}
+                          {(med.sideEffects?.length || med.overdoseEffects?.length) ? (
+                            <div className="mx-6 mb-6 grid grid-cols-1 md:grid-cols-2 gap-3">
+                              {med.sideEffects && med.sideEffects.length > 0 && (
+                                <div className="p-4 rounded-xl bg-warning/10 border border-warning/30">
+                                  <h4 className="font-medium flex items-center gap-2 mb-2 text-warning">
+                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                    Common Side Effects
+                                  </h4>
+                                  <ul className="text-sm space-y-1">
+                                    {med.sideEffects.map((effect, i) => (
+                                      <li key={i} className="flex items-center gap-2 text-foreground">
+                                        <span className="h-1.5 w-1.5 rounded-full bg-warning shrink-0" />
+                                        {effect}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                              {med.overdoseEffects && med.overdoseEffects.length > 0 && (
+                                <div className="p-4 rounded-xl bg-destructive/10 border border-destructive/30">
+                                  <h4 className="font-medium flex items-center gap-2 mb-2 text-destructive">
+                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                    Overdose / Overuse Effects
+                                  </h4>
+                                  <ul className="text-sm space-y-1">
+                                    {med.overdoseEffects.map((effect, i) => (
+                                      <li key={i} className="flex items-center gap-2 text-foreground">
+                                        <span className="h-1.5 w-1.5 rounded-full bg-destructive shrink-0" />
+                                        {effect}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                            </div>
+                          ) : null}
+                        </motion.div>
+                      ))}
                   </div>
                 )}
 
