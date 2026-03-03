@@ -390,43 +390,45 @@ export default function ScanPage() {
                             </div>
                           </div>
 
-                          {/* Side Effects */}
-                          {(med.sideEffects?.length || med.overdoseEffects?.length) ? (
-                            <div className="mx-6 mb-6 grid grid-cols-1 md:grid-cols-2 gap-3">
-                              {med.sideEffects && med.sideEffects.length > 0 && (
-                                <div className="p-4 rounded-xl bg-warning/10 border border-warning/30">
-                                  <h4 className="font-medium flex items-center gap-2 mb-2 text-warning">
-                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                                    Common Side Effects
-                                  </h4>
-                                  <ul className="text-sm space-y-1">
-                                    {med.sideEffects.map((effect, i) => (
-                                      <li key={i} className="flex items-center gap-2 text-foreground">
-                                        <span className="h-1.5 w-1.5 rounded-full bg-warning shrink-0" />
-                                        {effect}
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
-                              {med.overdoseEffects && med.overdoseEffects.length > 0 && (
-                                <div className="p-4 rounded-xl bg-destructive/10 border border-destructive/30">
-                                  <h4 className="font-medium flex items-center gap-2 mb-2 text-destructive">
-                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                                    Overdose / Overuse Effects
-                                  </h4>
-                                  <ul className="text-sm space-y-1">
-                                    {med.overdoseEffects.map((effect, i) => (
-                                      <li key={i} className="flex items-center gap-2 text-foreground">
-                                        <span className="h-1.5 w-1.5 rounded-full bg-destructive shrink-0" />
-                                        {effect}
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
+                          {/* Side Effects — always shown */}
+                          <div className="mx-6 mb-6 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div className="p-4 rounded-xl bg-warning/10 border border-warning/30">
+                              <h4 className="font-medium flex items-center gap-2 mb-2 text-warning">
+                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                Common Side Effects
+                              </h4>
+                              {med.sideEffects && med.sideEffects.length > 0 ? (
+                                <ul className="text-sm space-y-1">
+                                  {med.sideEffects.map((effect, i) => (
+                                    <li key={i} className="flex items-center gap-2 text-foreground">
+                                      <span className="h-1.5 w-1.5 rounded-full bg-warning shrink-0" />
+                                      {effect}
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <p className="text-sm text-muted-foreground italic">Side effects data not available for this medicine.</p>
                               )}
                             </div>
-                          ) : null}
+                            <div className="p-4 rounded-xl bg-destructive/10 border border-destructive/30">
+                              <h4 className="font-medium flex items-center gap-2 mb-2 text-destructive">
+                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                Overdose / Overuse Effects
+                              </h4>
+                              {med.overdoseEffects && med.overdoseEffects.length > 0 ? (
+                                <ul className="text-sm space-y-1">
+                                  {med.overdoseEffects.map((effect, i) => (
+                                    <li key={i} className="flex items-center gap-2 text-foreground">
+                                      <span className="h-1.5 w-1.5 rounded-full bg-destructive shrink-0" />
+                                      {effect}
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <p className="text-sm text-muted-foreground italic">Overdose effects data not available for this medicine.</p>
+                              )}
+                            </div>
+                          </div>
                         </motion.div>
                       ))}
                   </div>

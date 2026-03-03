@@ -52,7 +52,7 @@ serve(async (req) => {
 1. Read and extract text from handwritten medical prescriptions
 2. Identify medicine names, dosages, frequencies, and durations
 3. Provide a confidence score (0-100) for each extracted item
-4. For each medicine, provide common side effects and overdose/overuse effects based on your medical knowledge
+4. For EVERY medicine, you MUST provide side effects and overdose effects — this is MANDATORY and non-negotiable
 
 IMPORTANT GUIDELINES:
 - Extract ALL medicines mentioned in the prescription
@@ -60,7 +60,9 @@ IMPORTANT GUIDELINES:
 - If something is unclear, provide your best interpretation with a lower confidence score
 - Common medicine abbreviations: BD = twice daily, TDS = three times daily, OD = once daily, SOS = as needed
 - Common dosage patterns: 1-0-1 means morning and night, 1-1-1 means three times daily
-- Always include at least 3-5 common side effects and 2-4 overdose effects per medicine
+- MANDATORY: You MUST include exactly 4-6 common side effects for EVERY medicine — never leave sideEffects empty
+- MANDATORY: You MUST include exactly 3-4 overdose/overuse effects for EVERY medicine — never leave overdoseEffects empty
+- Use your medical knowledge to provide accurate side effects even if the medicine name is partially unclear
 
 Respond ONLY with valid JSON in this exact format:
 {
