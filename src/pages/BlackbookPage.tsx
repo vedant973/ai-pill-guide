@@ -327,10 +327,10 @@ export default function BlackbookPage() {
             We extend our heartfelt thanks to all our classmates for their appreciable and encouraging help, which made the project development process a collaborative and enriching experience. Furthermore, we are immensely thankful to our parents for providing their unwavering emotional and wishful support, which served as a foundation for our success.
           </p>
           <div style={{ textAlign: "right", marginTop: "40px", lineHeight: "2" }}>
-            <p>1. [Student Name 1]</p>
-            <p>2. [Student Name 2]</p>
-            <p>3. [Student Name 3]</p>
-            <p>4. [Student Name 4]</p>
+            <p>1. Aher Harshit Anil</p>
+            <p>2. Joshi Varun Dipak</p>
+            <p>3. Khairnar Mithilesh Randhir</p>
+            <p>4. Kungar Shubham Dileep</p>
           </div>
           <div className="bb-page-num">V</div>
         </div>
