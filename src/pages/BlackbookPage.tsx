@@ -240,10 +240,10 @@ export default function BlackbookPage() {
           </p>
           <p style={{ fontWeight: "bold", fontSize: "13pt", marginBottom: "8px" }}>Submitted by:</p>
           <p style={{ fontWeight: "bold", fontSize: "13pt", lineHeight: "2" }}>
-            1. [Student Name 1]<br />
-            2. [Student Name 2]<br />
-            3. [Student Name 3]<br />
-            4. [Student Name 4]
+            1. Aher Harshit Anil<br />
+            2. Joshi Varun Dipak<br />
+            3. Khairnar Mithilesh Randhir<br />
+            4. Kungar Shubham Dileep
           </p>
           <p style={{ fontWeight: "bold", fontSize: "13pt", marginTop: "24px", marginBottom: "8px" }}>Guided by:</p>
           <p style={{ fontWeight: "bold", fontSize: "13pt", marginBottom: "30px" }}>Mr. S. V. Waghmare</p>
