@@ -277,10 +277,10 @@ export default function BlackbookPage() {
             Certified that the project report entitled "<strong>MediScan AI: Intelligent Prescription Analysis and Medicine Information System</strong>" has been successfully completed by:
           </p>
           <div style={{ textAlign: "center", margin: "10px 0 16px 0", lineHeight: "2" }}>
-            <p>1. [Student Name 1]</p>
-            <p>2. [Student Name 2]</p>
-            <p>3. [Student Name 3]</p>
-            <p>4. [Student Name 4]</p>
+            <p>1. Aher Harshit Anil</p>
+            <p>2. Joshi Varun Dipak</p>
+            <p>3. Khairnar Mithilesh Randhir</p>
+            <p>4. Kungar Shubham Dileep</p>
           </div>
           <p style={{ fontSize: "12pt", lineHeight: "1.7", textAlign: "justify", marginBottom: "10px" }}>
             as partial fulfilment of Diploma course in <strong>Artificial Intelligence and Machine Learning</strong> under the <strong>Maharashtra State Board of Technical Education, Mumbai</strong> during the academic year <strong>2025-2026</strong>.
