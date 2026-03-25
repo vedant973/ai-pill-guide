@@ -1171,24 +1171,232 @@ export default function BlackbookPage() {
         </div>
 
         {/* ══════════════════════════════════════════════
-            PAGE 20 — COST + CONCLUSION + REFERENCES
+            PAGE 20 — CHAPTER 7: COST ESTIMATION (PAGE 1 of 5)
         ══════════════════════════════════════════════ */}
         <div className="bb-page">
           <div className="bb-running-header">MediScan AI: Intelligent Prescription Analysis and Medicine Information System</div>
           <h1 className="bb-chapter">CHAPTER 7: PROJECT COST ESTIMATION</h1>
+          <p className="bb-para">
+            Project Name: <strong>MediScan AI – Intelligent Prescription Analysis and Medicine Information System</strong>
+          </p>
+          <p className="bb-para">
+            Start Date: 15/07/2025 &nbsp;&nbsp;&nbsp; End Date: &nbsp;&nbsp;&nbsp;&nbsp; / &nbsp;&nbsp;/ 2026 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Duration: 7 months
+          </p>
+          <p className="bb-para">
+            Reviewed by: <strong>Mr. S. V. Waghmare</strong>, Lecturer in AIML, K. K. Wagh Polytechnic, Nashik
+          </p>
+          <p className="bb-para">
+            Approved by: <strong>Mr. H. M. Gaikwad</strong>, HOD (AN), K. K. Wagh Polytechnic, Nashik
+          </p>
+          <p className="bb-para">
+            <strong>Note:</strong> The primary web domain for this project has been generously sponsored by <strong>Lovable Cloud</strong> (Value: ₹699). The platform provides free hosting, backend infrastructure, and deployment pipelines for academic projects.
+          </p>
+
           <h2 className="bb-section">7.1 Development Cost (Academic Prototype)</h2>
           <table className="bb-table">
-            <thead><tr><th>Resource</th><th>Description</th><th>Cost</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Sr. No.</th>
+                <th>Development Segment</th>
+                <th>Description</th>
+                <th>Estimated Cost (₹)</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td>Development Tools</td><td>VS Code, GitHub, Node.js (Open Source)</td><td>₹ 0</td></tr>
-              <tr><td>Frontend Hosting</td><td>Lovable Cloud (Free Tier)</td><td>₹ 0</td></tr>
-              <tr><td>Backend (Supabase)</td><td>Lovable Cloud – Free Tier (500MB DB, 500K Edge invocations)</td><td>₹ 0</td></tr>
-              <tr><td>AI API (OpenRouter)</td><td>Google Gemini 2.5 Flash (~$0.15/1M tokens)</td><td>₹ 200/month</td></tr>
-              <tr><td>Domain Name</td><td>ai-pill-guide.lovable.app (Provided by Lovable)</td><td>₹ 0</td></tr>
-              <tr><td><strong>Total Academic Cost</strong></td><td></td><td><strong>₹ 200/month</strong></td></tr>
+              <tr><td>1</td><td>Domain Registration</td><td>ai-pill-guide.lovable.app (Sponsored by Lovable Cloud)</td><td>0 (Saved ₹699)</td></tr>
+              <tr><td>2</td><td>Cloud Compute (Development)</td><td>Lovable Cloud Edge Functions for running AI model inference calls</td><td>500</td></tr>
+              <tr><td>3</td><td>Database Hosting</td><td>Lovable Cloud (PostgreSQL storage, 500 MB free tier)</td><td>0</td></tr>
+              <tr><td>4</td><td>AI API Access</td><td>Google Gemini 2.5 Flash via OpenRouter (~$0.15/1M tokens, dev usage)</td><td>200</td></tr>
+              <tr><td>5</td><td>UI/UX &amp; Frontend Assets</td><td>Tailwind CSS, Radix UI, Lucide Icons (Open Source)</td><td>0</td></tr>
+              <tr><td>6</td><td>Software Tools &amp; IDEs</td><td>VS Code, GitHub Free, Postman, Chrome DevTools</td><td>0</td></tr>
+              <tr><td>7</td><td>Documentation &amp; Miscellaneous</td><td>Report generation, cloud backups, and miscellaneous printing costs</td><td>2,000</td></tr>
+              <tr><td colSpan={3}><strong>Total Cost</strong></td><td><strong>₹ 2,700</strong></td></tr>
             </tbody>
           </table>
-          <h1 className="bb-chapter" style={{ marginTop: "20px" }}>CHAPTER 8: CONCLUSION</h1>
+          <p className="bb-para" style={{ fontSize: "10pt", fontStyle: "italic" }}>
+            Table 7.1: Development Cost (Academic Prototype)
+          </p>
+          <div className="bb-inst-footer">
+            <span>K. K. Wagh Polytechnic, Nashik</span>
+            <span>62</span>
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════
+            PAGE 21 — CHAPTER 7: COST ESTIMATION (PAGE 2 of 5)
+        ══════════════════════════════════════════════ */}
+        <div className="bb-page">
+          <div className="bb-running-header">MediScan AI: Intelligent Prescription Analysis and Medicine Information System</div>
+          <h2 className="bb-section">7.2 Deployment Cost (Enterprise-Scale Production)</h2>
+          <table className="bb-table">
+            <thead>
+              <tr>
+                <th>Sr. No.</th>
+                <th>Deployment Segment</th>
+                <th>Description</th>
+                <th>Estimated Cost (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Dedicated Cloud Servers</td><td>GPU-enabled AWS EC2 instances for real-time Gemini Vision API integration and high-concurrency request handling</td><td>20,000</td></tr>
+              <tr><td>2</td><td>Enterprise Database Hosting</td><td>Managed Relational Database Service (RDS / Supabase Pro) with auto-scaling for prescription history logs</td><td>8,000</td></tr>
+              <tr><td>3</td><td>Security &amp; WAF</td><td>Cloudflare Enterprise (DDoS protection, SSL, Web App Firewall) for healthcare data protection compliance</td><td>8,000</td></tr>
+              <tr><td>4</td><td>Load Balancing &amp; CDN</td><td>Content Delivery Network to ensure fast global access and low-latency prescription image uploads</td><td>5,000</td></tr>
+              <tr><td>5</td><td>CI/CD Pipeline &amp; Automation</td><td>Automated testing and deployment tools (GitHub Actions / Jenkins) for continuous model and app updates</td><td>2,000</td></tr>
+              <tr><td>6</td><td>Domain &amp; Email Hosting</td><td>Enterprise domain renewal (mediscanai.in) and secure business email servers for patient communication</td><td>3,000</td></tr>
+              <tr><td>7</td><td>Maintenance &amp; Support</td><td>Server maintenance, AI model retraining with new drug data, log monitoring, and HIPAA compliance audits</td><td>24,000</td></tr>
+              <tr><td colSpan={3}><strong>Total Cost</strong></td><td><strong>₹ 70,000</strong></td></tr>
+            </tbody>
+          </table>
+          <p className="bb-para" style={{ fontSize: "10pt", fontStyle: "italic" }}>
+            Table 7.2: Deployment Cost (Enterprise-Scale Production)
+          </p>
+          <div className="bb-inst-footer">
+            <span>K. K. Wagh Polytechnic, Nashik</span>
+            <span>63</span>
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════
+            PAGE 22 — CHAPTER 7: COST ESTIMATION (PAGE 3 of 5)
+        ══════════════════════════════════════════════ */}
+        <div className="bb-page">
+          <div className="bb-running-header">MediScan AI: Intelligent Prescription Analysis and Medicine Information System</div>
+          <h2 className="bb-section">7.3 Estimated Costing Using COCOMO Model</h2>
+          <p className="bb-para">
+            The COCOMO (Constructive Cost Model) is a software estimation model used to predict the effort, cost, and time required to develop a project based on its size, typically measured in KLOC (Thousands of Lines of Code).
+          </p>
+          <p className="bb-para">The COCOMO model is categorized into three main types:</p>
+          <table className="bb-table">
+            <thead>
+              <tr><th>Type</th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Organic</td><td>2.4</td><td>1.05</td><td>2.5</td><td>0.38</td></tr>
+              <tr><td>Semi-Detached</td><td>3.0</td><td>1.12</td><td>2.5</td><td>0.35</td></tr>
+              <tr><td>Embedded</td><td>3.6</td><td>1.20</td><td>2.5</td><td>0.32</td></tr>
+            </tbody>
+          </table>
+          <p className="bb-para" style={{ fontSize: "10pt", fontStyle: "italic" }}>Table 7.3: COCOMO Model Categories</p>
+
+          <p className="bb-para">
+            <strong>i. Organic Model:</strong> Used for small-sized projects with experienced teams and familiar environments.
+          </p>
+          <p className="bb-para">
+            <strong>ii. Semi-Detached Model:</strong> Used for medium-sized projects with a mix of experienced and less-experienced members.
+          </p>
+
+          <h3 className="bb-subsection">7.3.1 Reasons for Choosing the Organic Model</h3>
+          <p className="bb-para"><strong>i. Project Type</strong></p>
+          <ul className="bb-list">
+            <li>MediScan AI is a web-based software application built using well-documented frameworks (React, TypeScript, Supabase).</li>
+            <li>It does not have the rigid hardware constraints of an embedded or real-time system.</li>
+            <li>The project team is familiar with the development environment and tools used.</li>
+            <li>Hence, it fits best into the <strong>Organic</strong> category.</li>
+          </ul>
+          <p className="bb-para"><strong>ii. Formula Used</strong></p>
+          <ul className="bb-list">
+            <li>Effort = 2.4 × (KLOC)¹·⁰⁵</li>
+            <li>Time = 2.5 × (Effort)⁰·³⁸</li>
+            <li>Team Size = Effort / Time</li>
+          </ul>
+
+          <h3 className="bb-subsection">7.3.2 Total COCOMO Calculations (Development Phase)</h3>
+          <p className="bb-para">
+            Given: Estimated Software Size = 5,000 LOC = 5.0 KLOC (Including React frontend, Edge Functions, medicine database, and UI components)
+          </p>
+          <p className="bb-para">
+            <strong>Effort Calculation</strong><br />
+            Effort = 2.4 × (5.0)¹·⁰⁵<br />
+            Effort ≈ 13.0 person-months
+          </p>
+          <p className="bb-para">
+            <strong>Time Calculation</strong><br />
+            Time = 2.5 × (13.0)⁰·³⁸<br />
+            Time ≈ 6.6 ≈ 7 months (Matches project timeline perfectly)
+          </p>
+          <p className="bb-para">
+            <strong>Team Size Calculation</strong><br />
+            Team Size = 13.0 / 6.6<br />
+            Team Size ≈ 2 members (Core Developers)
+          </p>
+          <div className="bb-inst-footer">
+            <span>K. K. Wagh Polytechnic, Nashik</span>
+            <span>64</span>
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════
+            PAGE 23 — CHAPTER 7: COST ESTIMATION (PAGE 4 of 5)
+        ══════════════════════════════════════════════ */}
+        <div className="bb-page">
+          <div className="bb-running-header">MediScan AI: Intelligent Prescription Analysis and Medicine Information System</div>
+          <h3 className="bb-subsection">7.3.3 Organic Phase-wise Cost Estimation</h3>
+          <p className="bb-para">
+            <strong>Note:</strong> To align with academic-level budgeting, developer rates have been adjusted to student/internship stipend levels.
+          </p>
+
+          <p className="bb-para"><strong>i. Requirement Analysis &amp; Planning</strong></p>
+          <ul className="bb-list">
+            <li>Duration: 10 Days | Rate per Day: ₹300</li>
+            <li>Estimated Cost: ₹3,000</li>
+          </ul>
+
+          <p className="bb-para"><strong>ii. System Design &amp; UI Mockups</strong></p>
+          <ul className="bb-list">
+            <li>Duration: 15 Days | Rate per Day: ₹300</li>
+            <li>Estimated Cost: ₹4,500</li>
+          </ul>
+
+          <p className="bb-para"><strong>iii. Frontend Development (React Dashboard &amp; Scan Interface)</strong></p>
+          <ul className="bb-list">
+            <li>Duration: 20 Days | Rate per Day: ₹400</li>
+            <li>Estimated Cost: ₹8,000</li>
+          </ul>
+
+          <p className="bb-para"><strong>iv. Backend Logic &amp; Database Setup (Supabase Edge Functions)</strong></p>
+          <ul className="bb-list">
+            <li>Duration: 30 Days | Rate per Day: ₹500</li>
+            <li>Estimated Cost: ₹15,000</li>
+          </ul>
+
+          <p className="bb-para"><strong>v. AI/ML Model Integration (Gemini Vision API &amp; Medicine NLP)</strong></p>
+          <ul className="bb-list">
+            <li>Duration: 40 Days | Rate per Day: ₹500</li>
+            <li>Estimated Cost: ₹20,000</li>
+          </ul>
+
+          <p className="bb-para"><strong>vi. System Testing, Security Auditing &amp; Debugging</strong></p>
+          <ul className="bb-list">
+            <li>Duration: 15 Days | Rate per Day: ₹300</li>
+            <li>Estimated Cost: ₹4,500</li>
+          </ul>
+
+          <p className="bb-para">
+            <strong>Final Development Cost (COCOMO-Based Normalization)</strong><br />
+            Total Estimated Developer Effort Cost = ₹ 55,000<br />
+            <em>(Note: As an academic project, developer effort is contributed by students, meaning this cost is theoretical labor value, not an out-of-pocket cash expense.)</em>
+          </p>
+          <div className="bb-inst-footer">
+            <span>K. K. Wagh Polytechnic, Nashik</span>
+            <span>65</span>
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════
+            PAGE 24 — CHAPTER 7: COST ESTIMATION (PAGE 5 of 5)
+        ══════════════════════════════════════════════ */}
+        <div className="bb-page">
+          <div className="bb-running-header">MediScan AI: Intelligent Prescription Analysis and Medicine Information System</div>
+          <h3 className="bb-subsection">7.3.4 Final Cost Summary</h3>
+          <ul className="bb-list">
+            <li>Sponsorship Saved: ₹ 699 (Domain and hosting provided by Lovable Cloud)</li>
+            <li>Out-of-pocket Prototype Infrastructure Cost: ₹ 2,700</li>
+            <li>Estimated Developer Labor Value (COCOMO): ₹ 55,000</li>
+            <li>Projected Real-World Deployment Cost (SME Scale): ₹ 70,000</li>
+          </ul>
+
+          <h1 className="bb-chapter" style={{ marginTop: "30px" }}>CHAPTER 8: CONCLUSION</h1>
           <p className="bb-para">
             Medication errors represent a critical and largely preventable patient safety challenge in modern healthcare. The fragmentation of medicine information across multiple inaccessible sources, combined with the widespread persistence of illegible handwritten prescriptions, creates a significant gap that MediScan AI directly addresses. This project successfully demonstrates that advanced AI vision technology, when properly integrated with a comprehensive medicine database and a patient-friendly interface, can provide an accessible, accurate, and comprehensive prescription analysis platform.
           </p>
@@ -1198,6 +1406,7 @@ export default function BlackbookPage() {
           <p className="bb-para">
             The system achieves its primary objectives: accurate prescription reading using Google Gemini Vision AI, comprehensive medicine information delivery including mandatory side effects, intuitive three-step user workflow, and a printable PDF report for medical consultation reference. Future enhancements will include drug interaction checking, multilingual support for Indian regional language prescriptions, integration with pharmacy management systems, and a mobile application for field use.
           </p>
+
           <h1 className="bb-chapter" style={{ marginTop: "20px" }}>CHAPTER 9: REFERENCES &amp; BIBLIOGRAPHY</h1>
           <h2 className="bb-section">9.1 Research Papers &amp; Journal Articles</h2>
           <ol className="bb-list-ol" style={{ fontSize: "11pt" }}>
@@ -1216,7 +1425,7 @@ export default function BlackbookPage() {
           </ul>
           <div className="bb-inst-footer">
             <span>K. K. Wagh Polytechnic, Nashik</span>
-            <span>75</span>
+            <span>66</span>
           </div>
         </div>
 
