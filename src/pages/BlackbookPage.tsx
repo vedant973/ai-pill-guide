@@ -1687,49 +1687,6 @@ export default function BlackbookPage() {
         {/* ══════════════════════════════════════════════
             PAGE 24 — CHAPTER 7: COST ESTIMATION (PAGE 5 of 5)
         ══════════════════════════════════════════════ */}
-        <div className="bb-page">
-          <div className="bb-running-header">MediScan AI: Intelligent Prescription Analysis and Medicine Information System</div>
-          <h3 className="bb-subsection">7.3.4 Final Cost Summary</h3>
-          <ul className="bb-list">
-            <li>Sponsorship Saved: ₹ 699 (Domain and hosting provided by Lovable Cloud)</li>
-            <li>Out-of-pocket Prototype Infrastructure Cost: ₹ 2,700</li>
-            <li>Estimated Developer Labor Value (COCOMO): ₹ 55,000</li>
-            <li>Projected Real-World Deployment Cost (SME Scale): ₹ 70,000</li>
-          </ul>
-
-          <h1 className="bb-chapter" style={{ marginTop: "30px" }}>CHAPTER 8: CONCLUSION</h1>
-          <p className="bb-para">
-            Medication errors represent a critical and largely preventable patient safety challenge in modern healthcare. The fragmentation of medicine information across multiple inaccessible sources, combined with the widespread persistence of illegible handwritten prescriptions, creates a significant gap that MediScan AI directly addresses. This project successfully demonstrates that advanced AI vision technology, when properly integrated with a comprehensive medicine database and a patient-friendly interface, can provide an accessible, accurate, and comprehensive prescription analysis platform.
-          </p>
-          <p className="bb-para">
-            The mandatory inclusion of side effects and overdose warnings for every identified medicine represents the most significant patient safety innovation of this project. By ensuring that this critical information is always presented — regardless of database availability — the system empowers patients with the knowledge they need to use their medicines safely and effectively. The hybrid AI-database architecture provides both breadth of coverage through AI extraction and depth of verified information through the curated medicine database.
-          </p>
-          <p className="bb-para">
-            The system achieves its primary objectives: accurate prescription reading using Google Gemini Vision AI, comprehensive medicine information delivery including mandatory side effects, intuitive three-step user workflow, and a printable PDF report for medical consultation reference. Future enhancements will include drug interaction checking, multilingual support for Indian regional language prescriptions, integration with pharmacy management systems, and a mobile application for field use.
-          </p>
-
-          <h1 className="bb-chapter" style={{ marginTop: "20px" }}>CHAPTER 9: REFERENCES &amp; BIBLIOGRAPHY</h1>
-          <h2 className="bb-section">9.1 Research Papers &amp; Journal Articles</h2>
-          <ol className="bb-list-ol" style={{ fontSize: "11pt" }}>
-            <li>Esteva, A. et al. (2017). "Dermatologist-level classification of skin cancer with deep neural networks." <em>Nature</em>, 542(7639), 115-118.</li>
-            <li>Miotto, R. et al. (2018). "Deep learning for healthcare: review, opportunities and challenges." <em>Briefings in Bioinformatics</em>, 19(6), 1236-1246.</li>
-            <li>WHO (2022). "Medication Safety in High-Risk Situations." World Health Organization Technical Report.</li>
-            <li>Google DeepMind (2024). "Gemini: A Family of Highly Capable Multimodal Models." <em>arXiv preprint arXiv:2312.11805</em>.</li>
-          </ol>
-          <h2 className="bb-section">9.2 Technical Documentation</h2>
-          <ul className="bb-list" style={{ fontSize: "11pt" }}>
-            <li>React.js Documentation – https://react.dev</li>
-            <li>Supabase Edge Functions Documentation – https://supabase.com/docs/guides/functions</li>
-            <li>Google Gemini API Reference – https://ai.google.dev/gemini-api/docs</li>
-            <li>OpenRouter API Documentation – https://openrouter.ai/docs</li>
-            <li>Tailwind CSS Documentation – https://tailwindcss.com/docs</li>
-          </ul>
-          <div className="bb-inst-footer">
-            <span>K. K. Wagh Polytechnic, Nashik</span>
-            <span>66</span>
-          </div>
-        </div>
-
       </div>
     </>
   );
