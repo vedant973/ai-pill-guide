@@ -1627,66 +1627,6 @@ export default function BlackbookPage() {
           </div>
         </div>
 
-        {/* ══════════════════════════════════════════════
-            PAGE 23 — CHAPTER 7: COST ESTIMATION (PAGE 4 of 5)
-        ══════════════════════════════════════════════ */}
-        <div className="bb-page">
-          <div className="bb-running-header">MediScan AI: Intelligent Prescription Analysis and Medicine Information System</div>
-          <h3 className="bb-subsection">7.3.3 Organic Phase-wise Cost Estimation</h3>
-          <p className="bb-para">
-            <strong>Note:</strong> To align with academic-level budgeting, developer rates have been adjusted to student/internship stipend levels.
-          </p>
-
-          <p className="bb-para"><strong>i. Requirement Analysis &amp; Planning</strong></p>
-          <ul className="bb-list">
-            <li>Duration: 10 Days | Rate per Day: ₹300</li>
-            <li>Estimated Cost: ₹3,000</li>
-          </ul>
-
-          <p className="bb-para"><strong>ii. System Design &amp; UI Mockups</strong></p>
-          <ul className="bb-list">
-            <li>Duration: 15 Days | Rate per Day: ₹300</li>
-            <li>Estimated Cost: ₹4,500</li>
-          </ul>
-
-          <p className="bb-para"><strong>iii. Frontend Development (React Dashboard &amp; Scan Interface)</strong></p>
-          <ul className="bb-list">
-            <li>Duration: 20 Days | Rate per Day: ₹400</li>
-            <li>Estimated Cost: ₹8,000</li>
-          </ul>
-
-          <p className="bb-para"><strong>iv. Backend Logic &amp; Database Setup (Supabase Edge Functions)</strong></p>
-          <ul className="bb-list">
-            <li>Duration: 30 Days | Rate per Day: ₹500</li>
-            <li>Estimated Cost: ₹15,000</li>
-          </ul>
-
-          <p className="bb-para"><strong>v. AI/ML Model Integration (Gemini Vision API &amp; Medicine NLP)</strong></p>
-          <ul className="bb-list">
-            <li>Duration: 40 Days | Rate per Day: ₹500</li>
-            <li>Estimated Cost: ₹20,000</li>
-          </ul>
-
-          <p className="bb-para"><strong>vi. System Testing, Security Auditing &amp; Debugging</strong></p>
-          <ul className="bb-list">
-            <li>Duration: 15 Days | Rate per Day: ₹300</li>
-            <li>Estimated Cost: ₹4,500</li>
-          </ul>
-
-          <p className="bb-para">
-            <strong>Final Development Cost (COCOMO-Based Normalization)</strong><br />
-            Total Estimated Developer Effort Cost = ₹ 55,000<br />
-            <em>(Note: As an academic project, developer effort is contributed by students, meaning this cost is theoretical labor value, not an out-of-pocket cash expense.)</em>
-          </p>
-          <div className="bb-inst-footer">
-            <span>K. K. Wagh Polytechnic, Nashik</span>
-            <span>65</span>
-          </div>
-        </div>
-
-        {/* ══════════════════════════════════════════════
-            PAGE 24 — CHAPTER 7: COST ESTIMATION (PAGE 5 of 5)
-        ══════════════════════════════════════════════ */}
       </div>
     </>
   );
