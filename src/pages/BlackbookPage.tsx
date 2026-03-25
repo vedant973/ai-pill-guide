@@ -1314,8 +1314,8 @@ export default function BlackbookPage() {
           </ul>
           <p className="bb-para"><strong>ii. COCOMO Formulae Applied</strong></p>
           <ul className="bb-list">
-            <li><strong>Effort (E)</strong> = 2.4 × (KLOC)<super>1.05</super> &nbsp;&nbsp; [Person-months]</li>
-            <li><strong>Development Time (T)</strong> = 2.5 × (Effort)<super>0.38</super> &nbsp;&nbsp; [Months]</li>
+            <li><strong>Effort (E)</strong> = 2.4 × (KLOC)<sup>1.05</sup> &nbsp;&nbsp; [Person-months]</li>
+            <li><strong>Development Time (T)</strong> = 2.5 × (Effort)<sup>0.38</sup> &nbsp;&nbsp; [Months]</li>
             <li><strong>Average Team Size (S)</strong> = Effort / Development Time &nbsp;&nbsp; [Persons]</li>
           </ul>
 
@@ -1329,14 +1329,14 @@ export default function BlackbookPage() {
 
           <p className="bb-para"><strong>Step 1 — Effort Calculation:</strong></p>
           <p className="bb-para" style={{ paddingLeft: "20px" }}>
-            E = 2.4 × (5.0)<super>1.05</super><br />
+            E = 2.4 × (5.0)<sup>1.05</sup><br />
             E = 2.4 × 5.524<br />
             <strong>E ≈ 13.26 person-months ≈ 13.0 person-months</strong>
           </p>
 
           <p className="bb-para"><strong>Step 2 — Development Time Calculation:</strong></p>
           <p className="bb-para" style={{ paddingLeft: "20px" }}>
-            T = 2.5 × (13.0)<super>0.38</super><br />
+            T = 2.5 × (13.0)<sup>0.38</sup><br />
             T = 2.5 × 2.64<br />
             <strong>T ≈ 6.6 months ≈ 7 months</strong> (Matches project start/end timeline perfectly)
           </p>
