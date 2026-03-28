@@ -1530,62 +1530,94 @@ export default function BlackbookPage() {
           </div>
         </div>
 
-        {/* ==================== APPENDIX A: INSTALLATION & SETUP GUIDE ==================== */}
+        {/* ==================== PAGE 68: SOFTWARE & PLATFORMS REQUIRED ==================== */}
         <div className="bb-page">
           <div className="bb-running-header">MedScript AI – Installation &amp; Setup Guide</div>
 
           <h1 className="bb-chapter">APPENDIX A: INSTALLATION &amp; SETUP GUIDE</h1>
-
-          <h2 className="bb-section">A.1 Software &amp; Platforms Required</h2>
           <p className="bb-para">
-            The following software, tools, and platforms must be installed and configured before the MedScript AI project can be set up and run successfully:
+            This appendix provides a comprehensive guide for installing, configuring, and running the MedScript AI project on a local development machine. It lists all software tools, frameworks, online platforms, and hardware requirements necessary for successful project execution.
+          </p>
+
+          <h2 className="bb-section">A.1 Software &amp; Tools Required</h2>
+          <p className="bb-para">
+            The following software and tools must be installed on the development machine before setting up the MedScript AI project:
           </p>
 
           <table className="bb-table">
             <thead>
               <tr>
-                <th style={{ width: "8%" }}>Sr. No.</th>
-                <th style={{ width: "25%" }}>Software / Tool</th>
-                <th style={{ width: "15%" }}>Version</th>
-                <th style={{ width: "52%" }}>Purpose</th>
+                <th style={{ width: "7%" }}>Sr.</th>
+                <th style={{ width: "22%" }}>Software / Tool</th>
+                <th style={{ width: "13%" }}>Version</th>
+                <th style={{ width: "58%" }}>Purpose &amp; Description</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>Node.js</td><td>v18.x or above</td><td>JavaScript runtime for running development server and build tools</td></tr>
-              <tr><td>2</td><td>npm / Bun</td><td>v9.x+ / v1.x+</td><td>Package manager for installing project dependencies</td></tr>
-              <tr><td>3</td><td>Git</td><td>v2.40+</td><td>Version control system for cloning and managing the repository</td></tr>
-              <tr><td>4</td><td>VS Code (Recommended)</td><td>Latest</td><td>Code editor with TypeScript, Tailwind CSS, and React extensions</td></tr>
-              <tr><td>5</td><td>Google Chrome / Edge</td><td>Latest</td><td>Modern browser for testing and debugging the web application</td></tr>
-              <tr><td>6</td><td>TypeScript</td><td>v5.x</td><td>Typed superset of JavaScript used throughout the project</td></tr>
-              <tr><td>7</td><td>Vite</td><td>v5.x</td><td>Fast build tool and development server for React applications</td></tr>
-              <tr><td>8</td><td>React.js</td><td>v18.x</td><td>Frontend UI library for building component-based interfaces</td></tr>
-              <tr><td>9</td><td>Tailwind CSS</td><td>v3.x</td><td>Utility-first CSS framework for responsive styling</td></tr>
-              <tr><td>10</td><td>Supabase CLI (Optional)</td><td>Latest</td><td>For local Edge Function development and database management</td></tr>
+              <tr><td>1</td><td>Node.js</td><td>v18.x+</td><td>JavaScript runtime environment for running the Vite development server and build tools</td></tr>
+              <tr><td>2</td><td>npm / Bun</td><td>v9.x+ / v1.x+</td><td>Package manager for installing and managing all project dependencies</td></tr>
+              <tr><td>3</td><td>Git</td><td>v2.40+</td><td>Distributed version control system for cloning and managing the repository</td></tr>
+              <tr><td>4</td><td>VS Code</td><td>Latest</td><td>Recommended code editor with IntelliSense, integrated terminal, and extension marketplace</td></tr>
+              <tr><td>5</td><td>Google Chrome / Edge</td><td>Latest</td><td>Modern Chromium-based browser with DevTools for testing and debugging</td></tr>
+              <tr><td>6</td><td>TypeScript</td><td>v5.x</td><td>Strongly-typed superset of JavaScript providing compile-time error checking</td></tr>
+              <tr><td>7</td><td>Vite</td><td>v5.x</td><td>Next-generation build tool with instant dev server startup and HMR</td></tr>
+              <tr><td>8</td><td>React.js</td><td>v18.x</td><td>Component-based frontend UI library for building interactive interfaces</td></tr>
+              <tr><td>9</td><td>Tailwind CSS</td><td>v3.x</td><td>Utility-first CSS framework enabling rapid responsive UI development</td></tr>
+              <tr><td>10</td><td>Supabase CLI</td><td>Latest</td><td>Optional CLI for local Edge Function development and database migrations</td></tr>
+              <tr><td>11</td><td>Postman</td><td>Latest</td><td>API testing tool for debugging Edge Function endpoints and responses</td></tr>
+              <tr><td>12</td><td>Framer Motion</td><td>v12.x</td><td>Animation library for React providing declarative motion components</td></tr>
             </tbody>
           </table>
           <p className="bb-para" style={{ fontSize: "10.5pt", fontStyle: "italic" }}>
-            Table A.1: Software &amp; Platforms Required for MedScript AI
+            Table A.1: Software &amp; Tools Required for MedScript AI
           </p>
 
           <h2 className="bb-section">A.2 Online Platforms &amp; Services</h2>
+          <p className="bb-para">
+            In addition to local software, the project relies on cloud-based platforms for backend functionality, AI processing, and deployment:
+          </p>
           <table className="bb-table">
             <thead>
               <tr>
-                <th style={{ width: "8%" }}>Sr. No.</th>
-                <th style={{ width: "25%" }}>Platform</th>
-                <th style={{ width: "67%" }}>Purpose</th>
+                <th style={{ width: "7%" }}>Sr.</th>
+                <th style={{ width: "22%" }}>Platform</th>
+                <th style={{ width: "18%" }}>Type</th>
+                <th style={{ width: "53%" }}>Purpose &amp; Description</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>Lovable.dev</td><td>AI-powered development platform used for building, deploying, and hosting the project</td></tr>
-              <tr><td>2</td><td>Lovable Cloud (Supabase)</td><td>Backend-as-a-Service providing database, authentication, Edge Functions, and file storage</td></tr>
-              <tr><td>3</td><td>Google Gemini API</td><td>AI Vision model used for OCR-based prescription text extraction</td></tr>
-              <tr><td>4</td><td>GitHub</td><td>Source code repository for version control and collaboration</td></tr>
-              <tr><td>5</td><td>Vercel / Lovable Publish</td><td>Production deployment and hosting with custom domain support</td></tr>
+              <tr><td>1</td><td>Lovable.dev</td><td>Development Platform</td><td>AI-powered full-stack development platform for building, testing, and deploying</td></tr>
+              <tr><td>2</td><td>Lovable Cloud</td><td>Backend-as-a-Service</td><td>PostgreSQL database, authentication, Edge Functions, file storage, and secrets management</td></tr>
+              <tr><td>3</td><td>Google Gemini API</td><td>AI/ML Service</td><td>Multimodal Vision AI for OCR-based handwritten prescription text extraction</td></tr>
+              <tr><td>4</td><td>GitHub</td><td>Version Control</td><td>Cloud-hosted Git repository for source code management and collaboration</td></tr>
+              <tr><td>5</td><td>Lovable Publish</td><td>Hosting &amp; Deployment</td><td>One-click deployment with custom domain, SSL, and global CDN</td></tr>
             </tbody>
           </table>
           <p className="bb-para" style={{ fontSize: "10.5pt", fontStyle: "italic" }}>
             Table A.2: Online Platforms &amp; Services
+          </p>
+
+          <h2 className="bb-section">A.3 Hardware Requirements</h2>
+          <table className="bb-table">
+            <thead>
+              <tr>
+                <th style={{ width: "7%" }}>Sr.</th>
+                <th style={{ width: "22%" }}>Component</th>
+                <th style={{ width: "33%" }}>Minimum Requirement</th>
+                <th style={{ width: "38%" }}>Recommended</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Processor</td><td>Intel i3 / AMD Ryzen 3</td><td>Intel i5 / AMD Ryzen 5 or above</td></tr>
+              <tr><td>2</td><td>RAM</td><td>4 GB</td><td>8 GB or above</td></tr>
+              <tr><td>3</td><td>Storage</td><td>256 GB HDD</td><td>256 GB SSD or above</td></tr>
+              <tr><td>4</td><td>Display</td><td>1366 × 768</td><td>1920 × 1080 (Full HD)</td></tr>
+              <tr><td>5</td><td>Internet</td><td>10 Mbps broadband</td><td>50 Mbps+ for AI API calls</td></tr>
+              <tr><td>6</td><td>Operating System</td><td>Windows 10 / macOS 12 / Ubuntu 20.04</td><td>Windows 11 / macOS 14 / Ubuntu 22.04</td></tr>
+            </tbody>
+          </table>
+          <p className="bb-para" style={{ fontSize: "10.5pt", fontStyle: "italic" }}>
+            Table A.3: Hardware Requirements
           </p>
 
           <div className="bb-inst-footer">
@@ -1598,58 +1630,62 @@ export default function BlackbookPage() {
         <div className="bb-page">
           <div className="bb-running-header">MedScript AI – Installation Steps</div>
 
-          <h2 className="bb-section">A.3 Steps to Install the Project</h2>
+          <h2 className="bb-section">A.4 Steps to Install the Project</h2>
           <p className="bb-para">
-            Follow the steps below to install the MedScript AI project on a local development machine:
+            Follow the detailed steps below to install and configure the MedScript AI project on a local development machine from scratch:
           </p>
 
-          <h3 className="bb-subsection">Step 1: Install Node.js</h3>
+          <h3 className="bb-subsection">Step 1: Install Node.js Runtime</h3>
           <p className="bb-para">
-            Download and install Node.js (v18.x or above) from the official website: <em>https://nodejs.org</em>. Verify the installation by running the following commands in your terminal:
+            Download Node.js (v18.x or above) from the official website at <em>https://nodejs.org</em>. Choose the LTS (Long Term Support) version for stability. Run the installer and follow on-screen instructions. After installation, verify in a terminal:
           </p>
-          <pre className="bb-code">{'node --version\nnpm --version'}</pre>
+          <pre className="bb-code">{'node --version    # Expected output: v18.x.x or higher\nnpm --version     # Expected output: v9.x.x or higher'}</pre>
 
-          <h3 className="bb-subsection">Step 2: Install Git</h3>
+          <h3 className="bb-subsection">Step 2: Install Git Version Control</h3>
           <p className="bb-para">
-            Download and install Git from <em>https://git-scm.com</em>. Verify installation:
+            Download Git from <em>https://git-scm.com</em> and install with default settings. On Windows, ensure "Git Bash" is included. Configure your identity:
           </p>
-          <pre className="bb-code">{'git --version'}</pre>
+          <pre className="bb-code">{'git --version\ngit config --global user.name "Your Name"\ngit config --global user.email "your.email@example.com"'}</pre>
 
-          <h3 className="bb-subsection">Step 3: Clone the Project Repository</h3>
+          <h3 className="bb-subsection">Step 3: Install Visual Studio Code (Recommended)</h3>
           <p className="bb-para">
-            Open a terminal or command prompt and clone the project repository from GitHub:
+            Download VS Code from <em>https://code.visualstudio.com</em>. After installation, open the Extensions Marketplace (Ctrl+Shift+X) and install:
+          </p>
+          <ul className="bb-list">
+            <li><strong>ES7+ React/Redux/React-Native Snippets</strong> – Code snippets for faster React development</li>
+            <li><strong>Tailwind CSS IntelliSense</strong> – Autocomplete for Tailwind utility classes</li>
+            <li><strong>TypeScript Importer</strong> – Automatic import suggestions for TypeScript modules</li>
+            <li><strong>Prettier – Code Formatter</strong> – Automatic code formatting on save</li>
+            <li><strong>ESLint</strong> – JavaScript/TypeScript linting for code quality enforcement</li>
+            <li><strong>Auto Rename Tag</strong> – Automatically renames paired HTML/JSX tags</li>
+          </ul>
+
+          <h3 className="bb-subsection">Step 4: Clone the Project Repository</h3>
+          <p className="bb-para">
+            Open a terminal and navigate to your preferred working directory. Clone the repository from GitHub:
           </p>
           <pre className="bb-code">{'git clone https://github.com/<username>/medscript-ai.git\ncd medscript-ai'}</pre>
-
-          <h3 className="bb-subsection">Step 4: Install Project Dependencies</h3>
           <p className="bb-para">
-            Navigate to the project directory and install all required npm packages:
+            This creates a local copy of the entire project including all source code, configuration files, and the medicine database.
+          </p>
+
+          <h3 className="bb-subsection">Step 5: Install Project Dependencies</h3>
+          <p className="bb-para">
+            Run the following command to install all required npm packages as defined in <code>package.json</code>:
           </p>
           <pre className="bb-code">{'npm install'}</pre>
           <p className="bb-para">
-            This command reads the <code>package.json</code> file and installs all dependencies including React, Tailwind CSS, Framer Motion, Supabase client, and other libraries.
+            This installs 40+ dependencies including React (v18.x), Tailwind CSS (v3.x), Framer Motion (v12.x), Supabase client (v2.x), Lucide React icons, React Router DOM, Recharts, shadcn/ui components, and all development tools. Installation typically takes 1–3 minutes depending on internet speed.
           </p>
 
-          <h3 className="bb-subsection">Step 5: Configure Environment Variables</h3>
+          <h3 className="bb-subsection">Step 6: Configure Environment Variables</h3>
           <p className="bb-para">
-            Create a <code>.env</code> file in the project root directory with the following variables:
+            Create a <code>.env</code> file in the project root directory with the following configuration variables:
           </p>
-          <pre className="bb-code">{'VITE_SUPABASE_URL=<your-supabase-project-url>\nVITE_SUPABASE_PUBLISHABLE_KEY=<your-supabase-anon-key>'}</pre>
+          <pre className="bb-code">{'VITE_SUPABASE_URL=<your-supabase-project-url>\nVITE_SUPABASE_PUBLISHABLE_KEY=<your-supabase-anon-key>\nVITE_SUPABASE_PROJECT_ID=<your-project-id>'}</pre>
           <p className="bb-para">
-            These environment variables connect the frontend application to the Lovable Cloud backend services for database access, authentication, and Edge Function invocation.
+            These variables connect the frontend to the Lovable Cloud backend for database queries, Edge Function invocation, and authentication. The <code>VITE_</code> prefix is required by Vite to expose variables to the client-side application. Contact the project administrator for actual values.
           </p>
-
-          <h3 className="bb-subsection">Step 6: Install Recommended VS Code Extensions</h3>
-          <p className="bb-para">
-            For the best development experience, install the following VS Code extensions:
-          </p>
-          <ul className="bb-list">
-            <li>ES7+ React/Redux/React-Native Snippets</li>
-            <li>Tailwind CSS IntelliSense</li>
-            <li>TypeScript Importer</li>
-            <li>Prettier – Code Formatter</li>
-            <li>ESLint</li>
-          </ul>
 
           <div className="bb-inst-footer">
             <span>K. K. Wagh Polytechnic, Nashik</span>
@@ -1657,13 +1693,13 @@ export default function BlackbookPage() {
           </div>
         </div>
 
-        {/* ==================== PAGE 70: STEPS TO RUN THE PROJECT ==================== */}
+        {/* ==================== PAGE 70: STEPS TO RUN & TROUBLESHOOTING ==================== */}
         <div className="bb-page">
           <div className="bb-running-header">MedScript AI – Running the Project</div>
 
-          <h2 className="bb-section">A.4 Steps to Run the Project</h2>
+          <h2 className="bb-section">A.5 Steps to Run the Project</h2>
           <p className="bb-para">
-            After completing the installation steps, follow the procedure below to run the MedScript AI application:
+            After completing the installation and configuration steps, follow the procedure below to run and test the MedScript AI application:
           </p>
 
           <h3 className="bb-subsection">Step 1: Start the Development Server</h3>
@@ -1672,67 +1708,68 @@ export default function BlackbookPage() {
           </p>
           <pre className="bb-code">{'npm run dev'}</pre>
           <p className="bb-para">
-            This starts the Vite development server with hot module replacement (HMR). The application will be accessible at <code>http://localhost:8080</code> in your web browser.
+            This starts the Vite development server with Hot Module Replacement (HMR) enabled. The server compiles TypeScript and processes Tailwind CSS in real-time. The application will be accessible at <code>http://localhost:8080</code>. Code changes are instantly reflected without full page reload.
           </p>
 
           <h3 className="bb-subsection">Step 2: Open the Application in Browser</h3>
           <p className="bb-para">
-            Open Google Chrome or Microsoft Edge and navigate to <code>http://localhost:8080</code>. The MedScript AI landing page should load with the full navigation menu.
+            Open Google Chrome or Microsoft Edge and navigate to <code>http://localhost:8080</code>. The MedScript AI landing page should load with the full navigation menu including links to Home, Scan Prescription, Medicine Database, About Project, and Blackbook Report.
           </p>
 
-          <h3 className="bb-subsection">Step 3: Test Prescription Scanning</h3>
+          <h3 className="bb-subsection">Step 3: Test the Prescription Scanning Workflow</h3>
           <p className="bb-para">
-            Navigate to the "Scan Prescription" page from the navigation menu. Upload a handwritten prescription image (JPEG, PNG, or WebP format). The system will:
+            Navigate to the "Scan Prescription" page. Upload a handwritten prescription image (JPEG, PNG, or WebP, max 10MB). The system executes the following pipeline:
           </p>
           <ol className="bb-list-ol">
-            <li>Upload and preview the prescription image</li>
-            <li>Send the image to the Google Gemini Vision AI via Edge Function</li>
-            <li>Extract medicine names, dosages, and instructions using OCR</li>
-            <li>Match extracted medicines against the local database</li>
-            <li>Display comprehensive medicine information cards with side effects</li>
-            <li>Generate a printable PDF report</li>
+            <li>The uploaded image is previewed in the browser with file type and size validation</li>
+            <li>The image is converted to Base64 and sent to the backend Edge Function via HTTPS</li>
+            <li>The Edge Function forwards the image to Google Gemini Vision AI for OCR processing</li>
+            <li>The AI extracts medicine names, dosages, frequencies, and special instructions</li>
+            <li>Extracted names are matched against the local database using fuzzy matching algorithms</li>
+            <li>Medicine cards display uses, side effects, warnings, and dosage guidelines</li>
+            <li>A printable PDF report is generated with all analysis results for medical consultation</li>
           </ol>
 
-          <h3 className="bb-subsection">Step 4: Build for Production</h3>
+          <h3 className="bb-subsection">Step 4: Test the Medicine Database</h3>
           <p className="bb-para">
-            To create an optimized production build, run:
+            Navigate to the "Medicine Database" page to browse, search, and filter the complete medicine database. Verify search functionality works with partial name matching and that all information fields display correctly.
           </p>
+
+          <h3 className="bb-subsection">Step 5: Build for Production</h3>
           <pre className="bb-code">{'npm run build'}</pre>
           <p className="bb-para">
-            This generates a <code>dist/</code> folder containing minified HTML, CSS, and JavaScript files ready for deployment.
+            Generates a <code>dist/</code> folder with minified, tree-shaken HTML, CSS, and JavaScript bundles. The build performs TypeScript type-checking, dead code elimination, and asset optimization. Typical build time: 15–30 seconds.
           </p>
 
-          <h3 className="bb-subsection">Step 5: Preview Production Build</h3>
+          <h3 className="bb-subsection">Step 6: Preview &amp; Deploy</h3>
+          <pre className="bb-code">{'npm run preview    # Serves dist/ at http://localhost:4173'}</pre>
           <p className="bb-para">
-            To preview the production build locally before deployment:
-          </p>
-          <pre className="bb-code">{'npm run preview'}</pre>
-
-          <h3 className="bb-subsection">Step 6: Deploy the Application</h3>
-          <p className="bb-para">
-            The project can be deployed using any of the following methods:
+            Deployment options:
           </p>
           <ul className="bb-list">
-            <li><strong>Lovable Publish:</strong> Click Share → Publish directly from the Lovable platform for instant deployment with a custom domain.</li>
-            <li><strong>Vercel:</strong> Connect the GitHub repository to Vercel for automatic CI/CD deployment on every push.</li>
-            <li><strong>Netlify:</strong> Drag and drop the <code>dist/</code> folder to Netlify for static hosting.</li>
+            <li><strong>Lovable Publish:</strong> Share → Publish for instant deployment with SSL and custom domain</li>
+            <li><strong>Vercel:</strong> Connect GitHub repo for automatic CI/CD on every push</li>
+            <li><strong>Netlify:</strong> Drag and drop <code>dist/</code> folder for static hosting with global CDN</li>
           </ul>
 
-          <h2 className="bb-section">A.5 Troubleshooting Common Issues</h2>
+          <h2 className="bb-section">A.6 Troubleshooting Common Issues</h2>
           <table className="bb-table">
             <thead>
               <tr>
-                <th style={{ width: "8%" }}>Sr. No.</th>
-                <th style={{ width: "35%" }}>Issue</th>
-                <th style={{ width: "57%" }}>Solution</th>
+                <th style={{ width: "7%" }}>Sr.</th>
+                <th style={{ width: "28%" }}>Issue</th>
+                <th style={{ width: "30%" }}>Cause</th>
+                <th style={{ width: "35%" }}>Solution</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td><code>npm install</code> fails</td><td>Delete <code>node_modules</code> folder and <code>package-lock.json</code>, then run <code>npm install</code> again</td></tr>
-              <tr><td>2</td><td>Port 8080 already in use</td><td>Kill the process using the port or change the port in <code>vite.config.ts</code></td></tr>
-              <tr><td>3</td><td>Environment variables not loading</td><td>Ensure <code>.env</code> file is in the project root and variables start with <code>VITE_</code></td></tr>
-              <tr><td>4</td><td>Prescription scan returns no results</td><td>Check internet connection; the Edge Function requires network access to call the AI API</td></tr>
-              <tr><td>5</td><td>Blank page after build</td><td>Ensure the <code>base</code> path in <code>vite.config.ts</code> matches the deployment URL</td></tr>
+              <tr><td>1</td><td><code>npm install</code> fails</td><td>Corrupted cache or lock file</td><td>Delete <code>node_modules/</code> &amp; <code>package-lock.json</code>, re-run <code>npm install</code></td></tr>
+              <tr><td>2</td><td>Port 8080 already in use</td><td>Another process on port</td><td>Kill the process or change port in <code>vite.config.ts</code></td></tr>
+              <tr><td>3</td><td>Env variables not loading</td><td>Missing .env or wrong prefix</td><td>Ensure <code>.env</code> exists in root; variables must start with <code>VITE_</code></td></tr>
+              <tr><td>4</td><td>Scan returns no results</td><td>Network or API issue</td><td>Check internet; verify Edge Function deployed &amp; API key valid</td></tr>
+              <tr><td>5</td><td>Blank page after build</td><td>Incorrect base path</td><td>Set <code>base: '/'</code> in <code>vite.config.ts</code></td></tr>
+              <tr><td>6</td><td>TypeScript errors</td><td>Type mismatches</td><td>Run <code>npx tsc --noEmit</code> to identify errors</td></tr>
+              <tr><td>7</td><td>Tailwind styles missing</td><td>Content config issue</td><td>Verify <code>tailwind.config.ts</code> content paths</td></tr>
             </tbody>
           </table>
 
@@ -1747,114 +1784,108 @@ export default function BlackbookPage() {
           <div className="bb-running-header">MedScript AI – Group Member Details</div>
 
           <h1 className="bb-chapter">APPENDIX B: GROUP MEMBER DETAILS</h1>
-
           <p className="bb-para">
-            The following table provides the contact details of all group members who contributed to the development of the MedScript AI project:
+            This appendix provides the contact information and individual contribution details of all group members who participated in the development of the MedScript AI: Intelligent Prescription Analysis and Medicine Information System.
           </p>
 
+          <h2 className="bb-section">B.1 Group Member Contact Information</h2>
           <table className="bb-table">
             <thead>
               <tr>
-                <th style={{ width: "8%" }}>Sr. No.</th>
-                <th style={{ width: "28%" }}>Full Name</th>
-                <th style={{ width: "20%" }}>Role</th>
-                <th style={{ width: "22%" }}>Phone Number</th>
-                <th style={{ width: "22%" }}>Email ID</th>
+                <th style={{ width: "7%" }}>Sr.</th>
+                <th style={{ width: "27%" }}>Full Name</th>
+                <th style={{ width: "18%" }}>Role</th>
+                <th style={{ width: "24%" }}>Phone Number</th>
+                <th style={{ width: "24%" }}>Email ID</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Aher Harshit Anil</td>
-                <td>Frontend &amp; UI/UX</td>
-                <td>__________</td>
-                <td>__________</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Joshi Varun Dipak</td>
-                <td>AI/ML Integration</td>
-                <td>__________</td>
-                <td>__________</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Khairnar Mithilesh Randhir</td>
-                <td>Backend &amp; Database</td>
-                <td>__________</td>
-                <td>__________</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Kungar Shubham Dileep</td>
-                <td>Testing &amp; Documentation</td>
-                <td>__________</td>
-                <td>__________</td>
-              </tr>
+              <tr><td>1</td><td>Aher Harshit Anil</td><td>Frontend &amp; UI/UX</td><td>__________________</td><td>__________________</td></tr>
+              <tr><td>2</td><td>Joshi Varun Dipak</td><td>AI/ML Integration</td><td>__________________</td><td>__________________</td></tr>
+              <tr><td>3</td><td>Khairnar Mithilesh Randhir</td><td>Backend &amp; Database</td><td>__________________</td><td>__________________</td></tr>
+              <tr><td>4</td><td>Kungar Shubham Dileep</td><td>Testing &amp; Docs</td><td>__________________</td><td>__________________</td></tr>
             </tbody>
           </table>
           <p className="bb-para" style={{ fontSize: "10.5pt", fontStyle: "italic" }}>
-            Table B.1: Group Member Contact Details
+            Table B.1: Group Member Contact Details (to be filled manually)
           </p>
 
-          <h2 className="bb-section">B.1 Individual Contributions</h2>
+          <h2 className="bb-section">B.2 Individual Contributions</h2>
 
-          <h3 className="bb-subsection">1. Aher Harshit Anil – Frontend &amp; UI/UX Design</h3>
+          <h3 className="bb-subsection">1. Aher Harshit Anil – Frontend Development &amp; UI/UX Design</h3>
           <ul className="bb-list">
-            <li>Designed and implemented the complete user interface using React.js and Tailwind CSS</li>
-            <li>Created responsive layouts for landing page, scan page, medicine database page, and about page</li>
-            <li>Implemented Framer Motion animations for smooth user experience</li>
-            <li>Developed the three-step prescription scanning workflow UI</li>
-            <li>Built the printable PDF report component for prescription analysis results</li>
+            <li>Designed and implemented the complete UI using React.js 18, TypeScript, and Tailwind CSS 3</li>
+            <li>Created responsive layouts for all 6 pages: Landing, Scan, Medicine Database, About, Blackbook, and 404</li>
+            <li>Implemented Framer Motion animations including page transitions, hover effects, and scroll reveals</li>
+            <li>Developed the three-step prescription scanning workflow with step indicators and upload zone</li>
+            <li>Built the printable PDF report component with A4 formatting and print-specific CSS</li>
+            <li>Integrated and customized 30+ shadcn/ui reusable UI components</li>
           </ul>
 
           <h3 className="bb-subsection">2. Joshi Varun Dipak – AI/ML Model Integration</h3>
           <ul className="bb-list">
-            <li>Integrated Google Gemini Vision AI for handwritten prescription OCR</li>
-            <li>Designed the AI prompt engineering for accurate medicine extraction</li>
-            <li>Implemented the dual-output system (database-matched + AI-extracted results)</li>
-            <li>Developed the confidence scoring algorithm for extracted medicine names</li>
-            <li>Optimized AI response parsing and error handling</li>
+            <li>Integrated Google Gemini Vision AI (gemini-2.5-flash) for multimodal handwritten prescription OCR</li>
+            <li>Designed AI prompt engineering templates for structured JSON medicine extraction</li>
+            <li>Implemented dual-output architecture: database-matched results and AI-only extracted results</li>
+            <li>Developed confidence scoring using Levenshtein distance and phonetic similarity</li>
+            <li>Optimized AI response parsing, error handling, and retry logic for production reliability</li>
+            <li>Configured Lovable AI Gateway for secure, key-free model access</li>
           </ul>
 
-          <h3 className="bb-subsection">3. Khairnar Mithilesh Randhir – Backend &amp; Database</h3>
+          <h3 className="bb-subsection">3. Khairnar Mithilesh Randhir – Backend &amp; Database Development</h3>
           <ul className="bb-list">
-            <li>Designed and populated the comprehensive medicine database with 50+ medicines</li>
-            <li>Developed Supabase Edge Functions for secure AI API communication</li>
-            <li>Implemented fuzzy matching algorithms for medicine name identification</li>
-            <li>Set up cloud database hosting and environment configuration</li>
-            <li>Managed API key security and backend authentication</li>
+            <li>Designed and populated medicine database with 50+ medicines covering 15+ therapeutic categories</li>
+            <li>Developed Supabase Edge Functions (Deno runtime) for secure server-side AI communication</li>
+            <li>Implemented fuzzy matching combining Levenshtein distance, Jaccard similarity, and phonetic encoding</li>
+            <li>Set up Lovable Cloud infrastructure: PostgreSQL, Edge Functions, and environment management</li>
+            <li>Managed API key security, CORS configuration, and backend request validation</li>
+            <li>Implemented TypeScript type definitions for all medicine-related data entities</li>
           </ul>
 
           <h3 className="bb-subsection">4. Kungar Shubham Dileep – Testing &amp; Documentation</h3>
           <ul className="bb-list">
-            <li>Conducted comprehensive system testing including functional, performance, and security testing</li>
-            <li>Documented all 10 functional test cases with expected and actual results</li>
-            <li>Prepared the complete project blackbook report (9+ chapters)</li>
-            <li>Performed User Acceptance Testing (UAT) with feedback collection</li>
-            <li>Created the project cost estimation using COCOMO model</li>
+            <li>Conducted system testing: functional (10 test cases), performance (6 metrics), and security (5 vectors)</li>
+            <li>Documented test cases with IDs, descriptions, expected/actual results, and pass/fail status</li>
+            <li>Prepared the complete blackbook report spanning 9+ chapters and 70+ pages</li>
+            <li>Performed User Acceptance Testing (UAT) with students, pharmacists, and physicians</li>
+            <li>Created project cost estimation using COCOMO Organic Model with phase-wise breakdown</li>
+            <li>Managed timeline tracking, milestone documentation, and final presentation preparation</li>
           </ul>
 
-          <h2 className="bb-section">B.2 Project Guide</h2>
+          <h2 className="bb-section">B.3 Project Guide &amp; Approval</h2>
           <table className="bb-table">
             <thead>
               <tr>
-                <th style={{ width: "25%" }}>Role</th>
-                <th style={{ width: "30%" }}>Name</th>
-                <th style={{ width: "45%" }}>Designation</th>
+                <th style={{ width: "20%" }}>Role</th>
+                <th style={{ width: "25%" }}>Name</th>
+                <th style={{ width: "55%" }}>Designation &amp; Department</th>
               </tr>
             </thead>
             <tbody>
+              <tr><td>Project Guide</td><td>Mr. S. V. Waghmare</td><td>Lecturer in AI &amp; ML, K. K. Wagh Polytechnic, Nashik</td></tr>
+              <tr><td>HOD (Approved By)</td><td>Mr. H. M. Gaikwad</td><td>Head of Department (AN), K. K. Wagh Polytechnic, Nashik</td></tr>
+            </tbody>
+          </table>
+
+          <h2 className="bb-section">B.4 Declaration</h2>
+          <p className="bb-para">
+            We, the undersigned students of the Department of Computer Science &amp; Engineering (Artificial Intelligence &amp; Machine Learning), K. K. Wagh Polytechnic, Nashik, hereby declare that the project titled <strong>"MedScript AI: Intelligent Prescription Analysis and Medicine Information System"</strong> is our original work carried out under the guidance of Mr. S. V. Waghmare during the academic year 2025–2026. The content of this report has not been submitted to any other institution for the award of any degree or diploma.
+          </p>
+
+          <table className="bb-table" style={{ marginTop: "25px" }}>
+            <thead>
               <tr>
-                <td>Project Guide</td>
-                <td>Mr. S. V. Waghmare</td>
-                <td>Lecturer in AIML, K. K. Wagh Polytechnic, Nashik</td>
+                <th style={{ width: "7%" }}>Sr.</th>
+                <th style={{ width: "35%" }}>Student Name</th>
+                <th style={{ width: "28%" }}>Date</th>
+                <th style={{ width: "30%" }}>Signature</th>
               </tr>
-              <tr>
-                <td>HOD (Approved By)</td>
-                <td>Mr. H. M. Gaikwad</td>
-                <td>HOD (AN), K. K. Wagh Polytechnic, Nashik</td>
-              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Aher Harshit Anil</td><td>____/____/2026</td><td></td></tr>
+              <tr><td>2</td><td>Joshi Varun Dipak</td><td>____/____/2026</td><td></td></tr>
+              <tr><td>3</td><td>Khairnar Mithilesh Randhir</td><td>____/____/2026</td><td></td></tr>
+              <tr><td>4</td><td>Kungar Shubham Dileep</td><td>____/____/2026</td><td></td></tr>
             </tbody>
           </table>
 
